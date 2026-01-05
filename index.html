@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernConnect | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8 border border-gray-100">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-indigo-600">ModernConnect</h1>
+            <p class="text-gray-500 mt-2 italic text-sm">Smart Campus Resolution System</p>
+        </div>
+
+        <form id="login-form" class="space-y-5">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">College Email</label>
+                <input type="email" id="email" required 
+                    class="w-full mt-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                    placeholder="name@moderncoe.edu.in">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700">Password</label>
+                <input type="password" id="password" required 
+                    class="w-full mt-1 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                    placeholder="••••••••">
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg hover:shadow-indigo-200">
+                Sign In
+            </button>
+        </form>
+
+        <div class="mt-8 text-center border-t pt-6">
+            <p class="text-sm text-gray-600">New to the platform? <a href="signup.html" class="text-indigo-600 font-bold hover:underline">Create Student Account</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

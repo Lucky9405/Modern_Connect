@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | ModernConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-50 font-['Inter'] min-h-screen">
+
+    <nav class="bg-white border-b px-6 py-4 flex justify-between items-center shadow-sm">
+        <button onclick="history.back()" class="text-indigo-600 font-bold flex items-center gap-2 hover:bg-indigo-50 px-3 py-1 rounded-lg transition">
+            ← Back
+        </button>
+        <h1 class="text-lg font-bold text-slate-800">Account Details</h1>
+        <button id="edit-btn" class="bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-indigo-200 transition">
+            Edit Profile
+        </button>
+    </nav>
+
+    <main class="max-w-2xl mx-auto p-6 mt-6">
+        <div class="bg-white rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden">
+            
+            <div class="bg-indigo-600 p-10 text-center text-white">
+                <div class="w-24 h-24 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center text-4xl font-bold border-4 border-white/30">
+                    <span id="initials">?</span>
+                </div>
+                <h2 id="display-name" class="text-2xl font-bold tracking-tight">Loading...</h2>
+                <span id="display-role" class="inline-block mt-2 px-3 py-1 bg-white/20 rounded-full text-[10px] font-black uppercase tracking-widest">Role</span>
+            </div>
+
+            <div id="profile-container" class="p-8 md:p-12 space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Full Name</label>
+                        <p id="prof-name" class="profile-value text-slate-800 font-semibold border-b border-slate-100 pb-2">---</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Course / Branch</label>
+                        <p id="prof-course" class="profile-value text-slate-800 font-semibold border-b border-slate-100 pb-2">---</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Class & Year</label>
+                        <p id="prof-year" class="profile-value text-slate-800 font-semibold border-b border-slate-100 pb-2">---</p>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-1">
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Campus Address</label>
+                        <p id="prof-address" class="profile-value text-slate-800 font-semibold border-b border-slate-100 pb-2">---</p>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-50 flex flex-col gap-4">
+                    <button id="logout-btn" class="w-full text-red-500 font-bold py-3 hover:bg-red-50 rounded-xl transition">Logout</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-10 right-10 transform translate-y-20 opacity-0 transition-all duration-500 z-[100]">
+        <div class="bg-slate-900 text-white px-6 py-4 rounded-2xl flex items-center gap-4">
+            <div id="toast-icon" class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-xs">✓</div>
+            <p id="toast-msg" class="text-sm font-bold"></p>
+        </div>
+    </div>
+
+    <script type="module" src="js/profile.js"></script>
+</body>
+</html>
