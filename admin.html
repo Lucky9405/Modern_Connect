@@ -10,8 +10,8 @@
     <style>
         body { font-family: 'Inter', sans-serif; background: #F8FAFC; }
         .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -19,55 +19,74 @@
     <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black shadow-lg shadow-indigo-200">A</div>
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-black">A</div>
                 <span class="font-black text-slate-800 text-xl tracking-tight">Admin Console</span>
             </div>
-            <button id="logout-btn" class="text-slate-400 hover:text-red-600 font-bold text-[10px] uppercase tracking-widest transition-all">Logout</button>
+            <button id="logout-btn" class="text-slate-400 hover:text-red-600 font-bold text-xs uppercase tracking-widest transition-all">Logout</button>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-            <div class="lg:col-span-1 bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col items-center">
-                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Issue Distribution</h3>
-                <div class="w-full h-64 relative">
-                    <canvas id="issueChart"></canvas>
-                </div>
+        <div class="flex flex-col lg:flex-row justify-between items-start gap-8 mb-10">
+            <div class="space-y-2">
+                <h1 class="text-4xl font-black text-slate-900 tracking-tighter">Campus Control</h1>
+                <p class="text-slate-500 font-medium">Manage student reports and community feedback.</p>
             </div>
-
-            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-indigo-600 p-8 rounded-[2.5rem] shadow-xl shadow-indigo-200 text-white flex flex-col justify-between transition-transform hover:scale-[1.02]">
-                    <p class="font-bold text-indigo-200 uppercase text-[10px] tracking-widest">Community Traction</p>
-                    <h2 id="total-upvotes" class="text-6xl font-black mt-2 tracking-tighter">0</h2>
-                    <p class="text-indigo-200 text-[10px] font-medium mt-4">Total upvotes received today</p>
-                </div>
-                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between transition-transform hover:scale-[1.02]">
-                    <p class="font-bold text-slate-400 uppercase text-[10px] tracking-widest">Campus Efficiency</p>
-                    <h2 id="resolution-rate" class="text-6xl font-black text-slate-800 mt-2 tracking-tighter">0%</h2>
-                    <p class="text-slate-400 text-[10px] font-medium mt-4">Resolved issues vs Total reports</p>
+            <div class="w-full lg:w-96 bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm">
+                <p class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-3">Post Global Announcement</p>
+                <div class="flex gap-2">
+                    <input type="text" id="broadcast-msg" placeholder="Attention students..." class="flex-1 bg-slate-50 p-3 rounded-xl outline-none text-xs font-bold border border-slate-100 focus:ring-2 focus:ring-indigo-500">
+                    <button id="send-broadcast" class="bg-indigo-600 text-white px-4 py-3 rounded-xl font-black text-[10px] uppercase shadow-lg shadow-indigo-100">Post</button>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden animate-fadeIn">
-            <div class="px-8 py-6 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
-                <h3 class="font-black text-slate-800 text-sm uppercase tracking-widest">Moderation Queue</h3>
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 py-1 bg-white rounded-full border border-slate-100">Live Data</span>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 h-80 flex flex-col items-center">
+                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Issue Distribution</h3>
+                <canvas id="issueChart"></canvas>
             </div>
+            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-indigo-600 p-8 rounded-[2.5rem] shadow-xl text-white flex flex-col justify-between">
+                    <p class="font-bold text-indigo-200 uppercase text-xs">Total Upvotes</p>
+                    <h2 id="total-upvotes" class="text-5xl font-black">0</h2>
+                </div>
+                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+                    <p class="font-bold text-slate-400 uppercase text-xs">Resolution Rate</p>
+                    <h2 id="resolution-rate" class="text-5xl font-black text-slate-800">0%</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex bg-slate-200/50 p-1 rounded-2xl w-fit mb-6 border border-slate-200">
+            <button onclick="setFilter('all')" id="filter-all" class="px-6 py-2 rounded-xl font-bold text-xs bg-white shadow-sm text-indigo-600 transition-all">All Issues</button>
+            <button onclick="setFilter('reported')" id="filter-reported" class="px-6 py-2 rounded-xl font-bold text-xs text-slate-500 hover:text-indigo-600 transition-all">Pending</button>
+            <button onclick="setFilter('resolved')" id="filter-resolved" class="px-6 py-2 rounded-xl font-bold text-xs text-slate-500 hover:text-indigo-600 transition-all">Fixed</button>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden mb-10">
             <div class="overflow-x-auto">
                 <table class="w-full text-left">
-                    <thead class="text-slate-400 uppercase text-[9px] font-black tracking-widest border-b border-slate-50">
+                    <thead class="bg-slate-50 text-slate-400 uppercase text-[9px] font-black tracking-widest">
                         <tr>
-                            <th class="px-8 py-5">Category & Priority</th>
-                            <th class="px-8 py-5">Details</th>
+                            <th class="px-8 py-5">Category</th>
+                            <th class="px-8 py-5">Issue Details</th>
                             <th class="px-8 py-5 text-center">Support</th>
                             <th class="px-8 py-5">Reporter</th>
-                            <th class="px-8 py-5 text-right">Actions</th>
+                            <th class="px-8 py-5 text-right">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-issues-list" class="divide-y divide-slate-50">
-                        </tbody>
+                    <tbody id="admin-issues-list" class="divide-y divide-slate-50"></tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+            <div class="px-8 py-6 border-b border-slate-50 bg-slate-50/50">
+                <h3 class="font-black text-slate-800 text-xs uppercase tracking-widest">Student Feedback & Suggestions</h3>
+            </div>
+            <div id="feedback-list" class="divide-y divide-slate-50 max-h-80 overflow-y-auto">
+                <p class="p-10 text-center text-slate-400 font-bold italic">Loading feedback...</p>
             </div>
         </div>
     </main>
